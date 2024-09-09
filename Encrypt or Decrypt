@@ -1,0 +1,101 @@
+# Take a text string and a shift value as input.
+
+def encrypt_caesar_cipher(text, shift):
+
+# Initializes an empty string to store the encrypted text.
+  
+encrypted_text = ""
+
+# Iterates over each character in the input text and check if the character is a letter
+
+    for char in text:
+
+        if char.isalpha():
+
+# shift % 3: Calculates the effective shift value by taking the remainder of the shift value divided by 3 (to handle shifts beyond 3).
+
+            shift_amount = shift % 3
+
+#  Determining the ASCII code for uppercase or lowercase letters.
+           
+            start = ord('A') if char.isupper() else ord('a')
+
+# Calculates the encrypted character. Shift the current character's ASCII code by the shift amount (3), ensuring it stays within the range of letters.
+
+            encrypted_char = chr(start + (ord(char) - start + shift_amount) % 3)
+
+# Appends the encrypted character to the encrypted_text string.
+
+            encrypted_text += encrypted_char
+
+        else:
+
+            encrypted_text += char
+
+# Return the encrypted Text
+
+    return encrypted_text
+
+# Take the text string and a shift value as input.
+
+    def decrypt_caesar_cipher(text, shift):
+
+# Call the encryption function with the negative shift value to decrypt the text.
+  
+    return encrypt_caesar_cipher(text, -shift)
+
+
+
+def main():
+
+# Prompt the user to choose between encryption and decryption.
+
+    choice = input("Would you like to (E)ncrypt or (D)ecrypt? ").upper()
+
+# Check if the choice is valid i.e. Between encryption and decryption.
+
+    if choice not in ['E', 'D']:
+
+# Print an error message if the choice is invalid.
+
+        print("Invalid choice. Please choose 'E' to encrypt or 'D' to decrypt.")
+
+# End the function if the choice is invalid.
+
+        return
+
+# Prompting the user to enter the text to be encrypted or decrypted.
+
+    text = input("Enter the text: ")
+
+# Enter the shift value.
+
+    shift = int(input("Enter the shift value: "))
+
+# Check if the user chose encryption.
+
+    if choice == 'E':
+
+# Now Encrypt the text using the encrypt_caesar_cipher function.
+
+        result = encrypt_caesar_cipher(text, shift)
+
+# Print the encrypted text
+
+        print(f"Encrypted text: {result}")
+
+# Check if the user chose decryption.
+
+    else:
+
+# Decrypt the text using the decrypt_caesar_cipher function.
+
+        result = decrypt_caesar_cipher(text, shift)
+
+# Print the decrypted text
+
+        print(f"Decrypted text: {result}")
+
+if __name__ == "__main__":
+
+    main()
